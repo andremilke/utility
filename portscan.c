@@ -2,12 +2,12 @@
 #include <netdb.h>
 int main(int argc, char *argv[])
 {
-	int meusocket;
-	int conecta;
+	int mysocket;
+	int conn;
 	int port;
-	int inicio = 0;
-	int final  = 65535;
-	char * destino;
+	int start = 0;
+	int end  = 65535;
+	char * destiny;
 	if(argc < 2)
 	{
 		printf("How to use portscan\n");
@@ -15,22 +15,22 @@ int main(int argc, char *argv[])
 		return 0;	
 	}
 
-	destino = argv[1];
+	destiny = argv[1];
 	struct sockaddr_in alvo;
 	
-	for(port = inicio; port < final; port++)
+	for(port = start; port < end; port++)
 	{
-		meusocket = socket(AF_INET, SOCK_STREAM, 0);
+		mysocket = socket(AF_INET, SOCK_STREAM, 0);
 		alvo.sin_family = AF_INET;
 		alvo.sin_port = htons(port);
-		alvo.sin_addr.s_addr = inet_addr(destino);
+		alvo.sin_addr.s_addr = inet_addr(destiny);
 	
-		conecta = connect(meusocket, (struct sockaddr *)&alvo, sizeof alvo);
-		if(conecta == 0)
+		conn = connect(mysocket, (struct sockaddr *)&alvo, sizeof alvo);
+		if(conn == 0)
 		{
-			printf("Porta %d - status [ABERTA] \n", port);
+			printf("Port %d - status [OPENNED] \n", port);
 		}
-		close(meusocket);
-		close(conecta);
+		close(mysocket);
+		close(conn);
 	}
 }
