@@ -18,4 +18,4 @@ if __name__ == '__main__':
     if len(sys.argv) == 3:
         CopyPasteXml(sys.argv[1], sys.argv[2])
     else:
-        print("Necessario informar o path de Origem e de Destino")
+        print("You must enter the Origin and Destination path")
