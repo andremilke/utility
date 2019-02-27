@@ -24,8 +24,7 @@ class BruteForceService(object):
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0', 'Accept-Language': 'pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3',
                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8', 
                    'Content-Type': 'application/x-www-form-urlencoded',
-                   'Cache-Control': 'no-cache', 'Connection': 'Keep-Alive',
-                   'Set-Cookie': 'phpMyAdmin=7d2213a1b50852903d64f63de546be7a073ad1cc'}       
+                   'Cache-Control': 'no-cache', 'Connection': 'Keep-Alive'}       
 
         start = datetime.datetime.now()
         for line in fpass:
