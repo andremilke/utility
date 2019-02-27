@@ -58,4 +58,4 @@ if __name__ == "__main__":
         brutehttp = BruteForceService(_listpass, _url, _user, _quote)
         brutehttp.bruteForce()
     else:
-        print("It is necessary to inform: password list, url, user and invalid quote %s" % len(sys.argv))
+        print("It is necessary to inform: password list, url, user and invalid quote")
