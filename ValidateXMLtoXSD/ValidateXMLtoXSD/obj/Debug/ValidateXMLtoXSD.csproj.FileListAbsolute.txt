@@ -1,0 +1,8 @@
+C:\Tanac\Projetos\ValidateXMLtoXSD\ValidateXMLtoXSD\bin\Debug\ValidateXMLtoXSD.exe
+C:\Tanac\Projetos\ValidateXMLtoXSD\ValidateXMLtoXSD\bin\Debug\ValidateXMLtoXSD.pdb
+C:\Tanac\Projetos\ValidateXMLtoXSD\ValidateXMLtoXSD\obj\Debug\ResolveAssemblyReference.cache
+C:\Tanac\Projetos\ValidateXMLtoXSD\ValidateXMLtoXSD\obj\Debug\ValidateXMLtoXSD.frmPrincipal.resources
+C:\Tanac\Projetos\ValidateXMLtoXSD\ValidateXMLtoXSD\obj\Debug\ValidateXMLtoXSD.Properties.Resources.resources
+C:\Tanac\Projetos\ValidateXMLtoXSD\ValidateXMLtoXSD\obj\Debug\ValidateXMLtoXSD.csproj.GenerateResource.Cache
+C:\Tanac\Projetos\ValidateXMLtoXSD\ValidateXMLtoXSD\obj\Debug\ValidateXMLtoXSD.exe
+C:\Tanac\Projetos\ValidateXMLtoXSD\ValidateXMLtoXSD\obj\Debug\ValidateXMLtoXSD.pdb
