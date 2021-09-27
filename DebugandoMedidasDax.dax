@@ -1,0 +1,64 @@
+﻿// DAX Query
+DEFINE
+
+  
+---- MODEL MEASURES BEGIN ----
+MEASURE Medidas[% Sales Amount] = 
+var salesAmountCurrent = [Sales Amount]
+VAR TOTAL = DIVIDE([Sales Amount],ABS([Sales Amount PY]))
+RETURN IF(salesAmountCurrent <> BLANK(), TOTAL - 1, BLANK())
+MEASURE Medidas[Sales Amount] = SUM(FactInternetSales[SalesAmount])
+MEASURE Medidas[Sales Amount PY] = 
+VAR salesAmountCurrent = [Sales Amount]
+VAR result = CALCULATE([Sales Amount], SAMEPERIODLASTYEAR(DimDate[FullDateAlternateKey]))
+
+return IF(salesAmountCurrent <> BLANK(), result, BLANK())
+---- MODEL MEASURES END ----
+
+
+
+VAR __ValueFilterDM1 = 
+    FILTER(
+      KEEPFILTERS(
+        SUMMARIZECOLUMNS(
+          'DimProduct'[EnglishProductName],
+          "CountProductSubcategoryKey", CALCULATE(COUNTA('DimProduct'[ProductSubcategoryKey])),
+          "SumStandardCost", CALCULATE(SUM('DimProduct'[StandardCost])),
+          "v__Sales_Amount", 'Medidas'[% Sales Amount],
+          "Sales_Amount", 'Medidas'[Sales Amount],
+          "Sales_Amount_PY", 'Medidas'[Sales Amount PY]
+        )
+      ),
+      NOT(ISBLANK([v__Sales_Amount]))
+    )
+
+  VAR __DS0Core = 
+    SUMMARIZECOLUMNS(
+      ROLLUPADDISSUBTOTAL('DimProduct'[EnglishProductName], "IsGrandTotalRowTotal"),
+      __ValueFilterDM1,
+      "Sales_Amount_PY", 'Medidas'[Sales Amount PY],
+      "CountProductSubcategoryKey", CALCULATE(COUNTA('DimProduct'[ProductSubcategoryKey])),
+      "SumStandardCost", CALCULATE(SUM('DimProduct'[StandardCost])),
+      "v__Sales_Amount", 'Medidas'[% Sales Amount],
+      "Sales_Amount", 'Medidas'[Sales Amount]
+    )
+
+  VAR __DS0PrimaryWindowed = 
+    TOPN(
+      502,
+      __DS0Core,
+      [IsGrandTotalRowTotal],
+      0,
+      [Sales_Amount_PY],
+      0,
+      'DimProduct'[EnglishProductName],
+      1
+    )
+
+EVALUATE
+  __DS0PrimaryWindowed
+
+ORDER BY
+  [IsGrandTotalRowTotal] DESC,
+  [Sales_Amount_PY] DESC,
+  'DimProduct'[EnglishProductName]
